@@ -6,6 +6,8 @@ class Profile::AddressesController < ApplicationController
   end
 
   def index
+    @user = current_user
+    @addresses = current_user.addresses
   end
 
   def edit
@@ -14,6 +16,13 @@ class Profile::AddressesController < ApplicationController
   end
 
   def update
+  end
+
+  def create
+    address = Address.create(user: current_user)
+    address.save
+    redirect_to address_index_path
+    # binding.pry
   end
 
 end

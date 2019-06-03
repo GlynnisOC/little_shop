@@ -167,7 +167,8 @@ RSpec.describe 'user profile', type: :feature do
 
       click_button 'Add Address'
 
-      expect(current_path).to eq(addresses_path)
+      expect(current_path).to eq(address_index_path)
+      save_and_open_page
     end
   end
 end
