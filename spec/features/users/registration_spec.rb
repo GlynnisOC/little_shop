@@ -100,11 +100,12 @@ RSpec.describe 'the registration page' do
       fill_in :user_email, with: "example@gmail.com"
       fill_in :user_password, with: "password"
       fill_in :user_password_confirmation, with: "password"
-      save_and_open_page
+
       click_button "Submit"
-      within (".address-details") do
-        expect(page).to have_content("Nickname")
-      end
+
+      user = User.find_by(name: "name")
+      save_and_open_page
+      expect(user.address_nickname).to eq("home")
     end
   end
 end
