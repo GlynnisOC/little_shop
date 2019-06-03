@@ -152,5 +152,22 @@ RSpec.describe 'user profile', type: :feature do
 
       expect(page).to have_link 'Delete Address'
     end
+
+    it "allows user to add addresses" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      visit new_address_path
+
+      fill_in "Address", with: "567 8th St."
+      fill_in "City", with: "citytoo"
+      fill_in "State", with: "Statetoo"
+      fill_in "Zip", with: "zip2"
+      fill_in "Nickname", with: "nickname"
+
+      click_button 'Add Address'
+
+      expect(current_path).to eq(addresses_path)
+    end
   end
 end
