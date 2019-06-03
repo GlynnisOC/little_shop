@@ -89,7 +89,7 @@ RSpec.describe 'the registration page' do
       expect(page).to have_content("Password confirmation doesn't match Password")
     end
 
-    it "saves first address added with nickname as 'home'" do
+    it "saves first address added with nickname as home" do
       visit registration_path
 
       fill_in :user_name, with: "name"
@@ -100,11 +100,11 @@ RSpec.describe 'the registration page' do
       fill_in :user_email, with: "example@gmail.com"
       fill_in :user_password, with: "password"
       fill_in :user_password_confirmation, with: "password"
-
+      save_and_open_page
       click_button "Submit"
       within (".address-details") do
         expect(page).to have_content("Nickname")
-      end 
+      end
     end
   end
 end

@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    # binding.pry
     @user = current_user
   end
 

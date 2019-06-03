@@ -5,8 +5,8 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :state
       t.string :zip
-      t.string :nickname, default: "home"
-      t.references :user, foreign_key: true 
+      t.integer :nickname, default: 0
+      t.references :user, foreign_key: true
     end
   end
 end
