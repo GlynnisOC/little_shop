@@ -88,5 +88,23 @@ RSpec.describe 'the registration page' do
       expect(current_path).to eq(registration_path)
       expect(page).to have_content("Password confirmation doesn't match Password")
     end
+
+    it "saves first address added with nickname as home" do
+      visit registration_path
+
+      fill_in :user_name, with: "name"
+      fill_in :user_address, with: "address"
+      fill_in :user_city, with: "city"
+      fill_in :user_state, with: "state"
+      fill_in :user_zip, with: "zip"
+      fill_in :user_email, with: "example@gmail.com"
+      fill_in :user_password, with: "password"
+      fill_in :user_password_confirmation, with: "password"
+
+      click_button "Submit"
+
+      user = User.find_by(name: "name")
+      expect(user.address_nickname).to eq("home")
+    end
   end
 end

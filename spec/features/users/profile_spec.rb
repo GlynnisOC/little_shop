@@ -30,7 +30,7 @@ RSpec.describe 'user profile', type: :feature do
 
         visit profile_path
 
-        click_link 'Edit'
+        click_link 'Edit Profile Data'
 
         expect(current_path).to eq('/profile/edit')
         expect(find_field('Name').value).to eq(@user.name)
@@ -130,6 +130,45 @@ RSpec.describe 'user profile', type: :feature do
       click_button 'Submit'
 
       expect(page).to have_content("Email has already been taken")
+    end
+
+    it "allows user to update addresses" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      visit edit_address_path
+
+      fill_in "Address", with: '123 4th St.'
+      fill_in "Address Nickname", with: :work
+
+      click_button 'Update Addresses'
+    end
+
+    it "allows user to delete addresses" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      visit edit_address_path
+
+      expect(page).to have_link 'Delete Address'
+    end
+
+    it "allows user to add addresses" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      visit new_address_path
+
+      fill_in "Address", with: "567 8th St."
+      fill_in "City", with: "citytoo"
+      fill_in "State", with: "Statetoo"
+      fill_in "Zip", with: "zip2"
+      fill_in "Nickname", with: "nickname"
+
+      click_button 'Add Address'
+
+      expect(current_path).to eq(address_index_path)
+      save_and_open_page
     end
   end
 end
