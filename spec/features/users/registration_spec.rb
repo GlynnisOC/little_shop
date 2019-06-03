@@ -102,13 +102,9 @@ RSpec.describe 'the registration page' do
       fill_in :user_password_confirmation, with: "password"
 
       click_button "Submit"
-
-      expect(page).to have_content("(home)")
-      click_link "Edit Profile Data"
-      fill_in :user_address, with: "address 2"
-      click_button "Submit"
-      
-      save_and_open_page
+      within (".address-details") do
+        expect(page).to have_content("Nickname")
+      end 
     end
   end
 end
