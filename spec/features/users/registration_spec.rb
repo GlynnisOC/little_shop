@@ -104,7 +104,6 @@ RSpec.describe 'the registration page' do
       click_button "Submit"
 
       user = User.find_by(name: "name")
-      save_and_open_page
       expect(user.address_nickname).to eq("home")
     end
   end

@@ -18,7 +18,11 @@ Rails.application.routes.draw do
 
   resources :items, only: [:index, :show]
   resources :merchants, only: [:index]
-  # resources :address, only: [:new]
+
+  get '/address/edit', to: 'profile/addresses#edit', as: :edit_address
+  patch '/address/edit', to: 'profile/addresses#update', as: :update_address
+  # get '/address', to: 'users#show', as: :address
+  # get '/address/edit', to: 'users#edit', as: :edit_address
 
   # User Profile Paths
   get '/profile', to: 'users#show', as: :profile
