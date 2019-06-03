@@ -137,11 +137,20 @@ RSpec.describe 'user profile', type: :feature do
       login_as(@user)
 
       visit edit_address_path
-      
+
       fill_in "Address", with: '123 4th St.'
       fill_in "Address Nickname", with: :work
 
       click_button 'Update Addresses'
+    end
+
+    it "allows user to delete addresses" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      visit edit_address_path
+
+      expect(page).to have_link 'Delete Address'
     end
   end
 end

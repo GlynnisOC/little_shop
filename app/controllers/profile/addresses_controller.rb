@@ -10,7 +10,6 @@ class Profile::AddressesController < ApplicationController
   end
 
   private
-
   def address_params
     params.require(:address).permit(:address, :city, :state, :zip, :address_nickname)
   end

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get '/address/edit', to: 'profile/addresses#edit', as: :edit_address
   patch '/address/edit', to: 'profile/addresses#update', as: :update_address
+  delete '/address/delete', to: 'profile/addresses#destroy', as: :delete_address
   # get '/address', to: 'users#show', as: :address
   # get '/address/edit', to: 'users#edit', as: :edit_address
 
