@@ -167,8 +167,17 @@ RSpec.describe 'user profile', type: :feature do
 
       click_button 'Add Address'
 
-      expect(current_path).to eq(address_index_path)
-      save_and_open_page
+      expect(current_path).to eq(profile_path)
+    end
+
+    it "has links to edit, show all, add, and delete an address" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      expect(page).to have_link 'Edit Addresses'
+      expect(page).to have_link 'All Addresses'
+      expect(page).to have_link 'Add An Address'
+      expect(page).to have_link 'Delete An Address'
     end
   end
 end
