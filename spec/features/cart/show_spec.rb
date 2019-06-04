@@ -22,8 +22,10 @@ RSpec.describe "Cart show page" do
       click_on "Add to Cart"
 
       click_button 'Check Out'
-      # save_and_open_page
-      click_link 'Choose Shipping Address'
+      order = Order.last
+      
+      visit profile_order_path(order)
+      expect(page).to have_content 'Choose Your Shipping Address'
     end
   end
 

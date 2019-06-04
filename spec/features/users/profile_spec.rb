@@ -158,7 +158,7 @@ RSpec.describe 'user profile', type: :feature do
 
       click_button 'Add Address'
 
-      expect(current_path).to eq(profile_path)
+      expect(current_path).to eq(address_index_path)
     end
 
     it "has links to edit, show all, add, and delete an address" do
@@ -177,9 +177,6 @@ RSpec.describe 'user profile', type: :feature do
 
       order = @user.orders.create!(status: 1)
       order_two = @user.orders.create!(status: 2)
-
-      
-
     end
   end
 end

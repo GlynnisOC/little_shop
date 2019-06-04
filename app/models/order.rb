@@ -10,7 +10,7 @@ class Order < ApplicationRecord
 
   enum status: [:pending, :packaged, :shipped, :cancelled]
 
-  def default_address
+  def chosen_address
     user_id = user
     user.address_nickname
   end

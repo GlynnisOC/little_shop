@@ -6,6 +6,7 @@ class Profile::AddressesController < ApplicationController
   end
 
   def index
+    @addresses = Address.all
   end
 
   def edit
@@ -18,12 +19,16 @@ class Profile::AddressesController < ApplicationController
 
   def create
     address = Address.create(user: current_user)
-    address.save
-    redirect_to profile_path
+    redirect_to address_index_path
   end
 
   def destroy
     address = Address.find(params[:id])
+    # @order_addresses.address_id.each do |ai|
+    #
+    # end
+    current_user.addresses.delete(address)
+    redirect_to address_index_path
   end
 
 end

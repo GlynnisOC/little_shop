@@ -32,7 +32,7 @@ RSpec.describe "Checking out" do
 
     it "should have Shipping Address show in every order" do
       expect(page).to have_content("Shipping Address")
-      expect(page).to have_content("#{@new_order.default_address}")
+      expect(page).to have_content("#{@new_order.chosen_address}")
     end
 
     it "should create a new order" do
