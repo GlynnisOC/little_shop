@@ -133,13 +133,13 @@ RSpec.describe 'user profile', type: :feature do
     end
 
     it "allows user to update addresses" do
-      create(:user, email: 'mousse@email.com')
       login_as(@user)
-
-      visit edit_address_path
+      @user.addresses.create!(address: "address", city: "city", state: "state", zip: "zip")
+      address = @user.addresses.last
+      # binding.pry
+      visit edit_address_path(address)
 
       fill_in "Address", with: '123 4th St.'
-      fill_in "Address Nickname", with: :work
 
       click_button 'Update Addresses'
     end

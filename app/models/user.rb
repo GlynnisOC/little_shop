@@ -4,14 +4,15 @@ class User < ApplicationRecord
   enum role: [:default, :merchant, :admin]
   enum address_nickname: [:home, :work, :school]
 
+  has_many :addresses
+  accepts_nested_attributes_for :addresses
+
   validates_presence_of :name, :address, :city, :state, :zip, :address_nickname
   validates :email, presence: true, uniqueness: true
 
-  has_many :addresses
   # as a consumer
   has_many :orders
   has_many :order_items, through: :orders
-
   # as a merchant
   has_many :items, foreign_key: 'merchant_id'
 

@@ -1,6 +1,6 @@
 <h1>Update Your Addresses</h1>
 
-<%= form_for @address, url: edit_address_path, method: :patch do |f| %>
+<%= form_for @address, url: edit_address_path do |f| %>
   <%= f.label :address %>
   <%= f.text_field :address %>
 
@@ -12,9 +12,6 @@
 
   <%= f.label :zip %>
   <%= f.text_field :zip %>
-
-  <%= f.label :address_nickname, "Address Nickname" %>
-  <%= f.text_field :address_nickname %>
 
   <%= f.submit "Update Addresses" %>
 

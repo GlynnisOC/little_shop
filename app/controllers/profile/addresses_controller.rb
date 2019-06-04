@@ -11,10 +11,14 @@ class Profile::AddressesController < ApplicationController
 
   def edit
     @user = current_user
-    @address = current_user.address
+    @address = current_user.addresses.first
   end
 
   def update
+    # binding.pry
+    address = current_user.addresses.first
+    address.update!(address_params)
+    redirect_to address_index_path
   end
 
   def create
@@ -24,11 +28,14 @@ class Profile::AddressesController < ApplicationController
 
   def destroy
     address = Address.find(params[:id])
-    # @order_addresses.address_id.each do |ai|
-    #
-    # end
     current_user.addresses.delete(address)
     redirect_to address_index_path
+  end
+
+  private
+
+  def address_params
+    params.require(:address).permit(:address, :city, :state, :zip, :nickname)
   end
 
 end

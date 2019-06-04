@@ -93,10 +93,10 @@ RSpec.describe 'the registration page' do
       visit registration_path
 
       fill_in :user_name, with: "name"
-      fill_in :user_address, with: "address"
-      fill_in :user_city, with: "city"
-      fill_in :user_state, with: "state"
-      fill_in :user_zip, with: "zip"
+      fill_in "Address", with: "address"
+      fill_in "City", with: "city"
+      fill_in "State", with: "state"
+      fill_in "Zip", with: "zip"
       fill_in :user_email, with: "example@gmail.com"
       fill_in :user_password, with: "password"
       fill_in :user_password_confirmation, with: "password"
