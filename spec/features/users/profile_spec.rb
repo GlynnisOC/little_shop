@@ -177,7 +177,8 @@ RSpec.describe 'user profile', type: :feature do
 
       order = @user.orders.create!(status: 1)
       order_two = @user.orders.create!(status: 2)
-      binding.pry
+
+      
 
     end
   end

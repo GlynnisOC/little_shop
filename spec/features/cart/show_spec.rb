@@ -9,6 +9,24 @@ RSpec.describe "Cart show page" do
     @item_3 = create(:item, user: @merchant_2)
   end
 
+  context "a user has ability to choose shipping address" do
+    scenario "as a regular user" do
+      user = create(:user)
+      login_as(user)
+
+      visit item_path(@item_1)
+      click_on "Add to Cart"
+      visit item_path(@item_2)
+      click_on "Add to Cart"
+      visit item_path(@item_3)
+      click_on "Add to Cart"
+
+      click_button 'Check Out'
+      # save_and_open_page
+      click_link 'Choose Shipping Address'
+    end
+  end
+
   context "a regular user or visitor sees their cart summary" do
     scenario "as a regular user" do
       user = create(:user)

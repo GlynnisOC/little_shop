@@ -6,9 +6,14 @@ class Order < ApplicationRecord
   has_many :order_addresses
   has_many :addresses, through: :order_addresses
 
-  validates_presence_of :status, :address_id
+  validates_presence_of :status
 
   enum status: [:pending, :packaged, :shipped, :cancelled]
+
+  def default_address
+    user_id = user
+    user.address_nickname
+  end
 
   def total_item_count
     order_items.sum(:quantity)
