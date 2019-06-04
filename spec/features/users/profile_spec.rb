@@ -144,15 +144,6 @@ RSpec.describe 'user profile', type: :feature do
       click_button 'Update Addresses'
     end
 
-    it "allows user to delete addresses" do
-      create(:user, email: 'mousse@email.com')
-      login_as(@user)
-
-      visit edit_address_path
-
-      expect(page).to have_link 'Delete Address'
-    end
-
     it "allows user to add addresses" do
       create(:user, email: 'mousse@email.com')
       login_as(@user)
@@ -178,6 +169,16 @@ RSpec.describe 'user profile', type: :feature do
       expect(page).to have_link 'All Addresses'
       expect(page).to have_link 'Add An Address'
       expect(page).to have_link 'Delete An Address'
+    end
+
+    it "does not allow user to delete or change address if used in completed order" do
+      create(:user, email: 'mousse@email.com')
+      login_as(@user)
+
+      order = @user.orders.create!(status: 1)
+      order_two = @user.orders.create!(status: 2)
+      binding.pry
+
     end
   end
 end

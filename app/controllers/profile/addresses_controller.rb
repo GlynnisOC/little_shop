@@ -22,4 +22,8 @@ class Profile::AddressesController < ApplicationController
     redirect_to profile_path
   end
 
+  def destroy
+    address = Address.find(params[:id])
+  end
+
 end
