@@ -8,8 +8,4 @@ class Address < ApplicationRecord
 
   enum nickname: [:home, :work, :school]
 
-  # def nicknames
-  #   address = Address.find([:id])
-  #   Address.nicknames[address.nickname]
-  # end
 end

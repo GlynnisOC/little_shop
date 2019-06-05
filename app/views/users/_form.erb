@@ -18,7 +18,7 @@
   <%= f.label :password_confirmation %>:
   <%= f.password_field :password_confirmation %>
 </p>
-  <%= f.fields_for :addresses do |address| %>
+  <%= fields_for :addresses do |address| %>
     <%= address.label :address %>:
     <%= address.text_field :address %>
 

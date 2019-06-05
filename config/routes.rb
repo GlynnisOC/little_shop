@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
   resources :merchants, only: [:index]
 
-  get '/address/edit', to: 'profile/addresses#edit', as: :edit_address
-  patch '/address/edit', to: 'profile/addresses#update', as: :update_address
-  delete '/address/delete/:id', to: 'profile/addresses#destroy', as: :delete_address
+  get '/addresses/edit', to: 'profile/addresses#edit', as: :edit_address
+  patch '/addresses/edit', to: 'profile/addresses#update', as: :update_address
+  delete '/addresses/delete/:id', to: 'profile/addresses#destroy', as: :delete_address
   get '/profile/addresses', to: 'profile/addresses#create'
+  get '/addresses', to: 'profile/addresses#new', as: :new_address
   get '/addresses', to: 'profile/addresses#index', as: :address_index
 
   # User Profile Paths

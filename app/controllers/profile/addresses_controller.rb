@@ -1,37 +1,39 @@
 class Profile::AddressesController < ApplicationController
   before_action :require_reguser
 
+  def new
+    @address = Address.new
+  end
+
   def index
     @addresses = Address.all
   end
 
   def edit
-    @user = current_user
-    @address = current_user.addresses.first
-    @addresses = current_user.addresses
+    @address = Address.find(params["format"])
   end
 
   def update
-    address = current_user.addresses.first
-    address.update!(address_params)
-    redirect_to address_index_path
+    @address = Address.find(params["format"])
+    @address.update!(address_params)
+    redirect_to profile_path
   end
 
   def create
-    address = Address.create(user: current_user, address: current_user.address, city: current_user.city, state: current_user.state, zip: current_user.zip)
-    redirect_to profile_addresses_path
+    current_user.addresses.create(address_params)
+    redirect_to profile_path
   end
 
   def destroy
-    address = Address.find(params[:addresses][:user_id])
+    address = Address.find(params[:id])
     current_user.addresses.delete(address)
-    redirect_to address_index_path
+    redirect_to profile_path
   end
 
   private
-
   def address_params
-    params.require(:address).permit(:address, :city, :state, :zip, :nickname)
+    # binding.pry
+    params.require(:address).permit(:address, :state, :city, :zip, :nickname)
   end
 
 end

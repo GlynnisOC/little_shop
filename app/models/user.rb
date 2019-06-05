@@ -7,7 +7,6 @@ class User < ApplicationRecord
   has_many :addresses
   accepts_nested_attributes_for :addresses
 
-  validates_presence_of :name, :address, :city, :state, :zip, :address_nickname
   validates :email, presence: true, uniqueness: true
 
   # as a consumer
