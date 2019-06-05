@@ -18,12 +18,12 @@ class Profile::AddressesController < ApplicationController
   end
 
   def create
-    address = Address.create(user: current_user)
-    redirect_to address_index_path
+    address = Address.create(user: current_user, address: current_user.address, city: current_user.city, state: current_user.state, zip: current_user.zip)
+    redirect_to profile_addresses_path
   end
 
   def destroy
-    address = Address.find(params[:user_id])
+    address = Address.find(params[:addresses][:user_id])
     current_user.addresses.delete(address)
     redirect_to address_index_path
   end
