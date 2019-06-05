@@ -1,10 +1,6 @@
 class Profile::AddressesController < ApplicationController
   before_action :require_reguser
 
-  def new
-    @address = Address.new
-  end
-
   def index
     @addresses = Address.all
   end
@@ -12,10 +8,10 @@ class Profile::AddressesController < ApplicationController
   def edit
     @user = current_user
     @address = current_user.addresses.first
+    @addresses = current_user.addresses
   end
 
   def update
-    # binding.pry
     address = current_user.addresses.first
     address.update!(address_params)
     redirect_to address_index_path
@@ -27,7 +23,7 @@ class Profile::AddressesController < ApplicationController
   end
 
   def destroy
-    address = Address.find(params[:id])
+    address = Address.find(params[:user_id])
     current_user.addresses.delete(address)
     redirect_to address_index_path
   end

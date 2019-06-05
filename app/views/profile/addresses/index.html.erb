@@ -1,0 +1,9 @@
+<h1>Address Index</h1>
+
+<% @addresses.each do |address| %>
+  Street: <%= address.address %>
+  City: <%= address.city %>
+  State: <%= address.state %>
+  Zip: <%= address.zip %>
+  Nickname: <%= address.nickname %>
+<% end %>

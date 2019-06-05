@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many :addresses
   has_many :order_addresses
   has_many :addresses, through: :order_addresses
+  has_and_belongs_to_many :addresses
 
   validates_presence_of :status
 
@@ -17,6 +18,10 @@ class Order < ApplicationRecord
 
   def total_item_count
     order_items.sum(:quantity)
+  end
+
+  def changeable_order?
+    status == "pending"
   end
 
   def total_cost

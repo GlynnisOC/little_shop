@@ -37,8 +37,16 @@ RSpec.describe Order, type: :model do
       create(:order_item, order: @o5, item: @i1, quantity: 5, price: 2)
     end
 
-    it '.total_item_count' do
+    it '#total_item_count' do
       expect(@order.total_item_count).to eq(@oi_1.quantity + @oi_2.quantity)
+    end
+
+    it "#changeable_order?" do
+      order = create(:order)
+      order_two = create(:shipped_order)
+
+      expect(order.changeable_order?).to be_truthy
+      expect(order_two.changeable_order?).to be_falsy
     end
 
     it '.total_cost' do

@@ -19,6 +19,7 @@ RSpec.describe "as a visitor on new registration form" do
 
       user = User.last
       expect(user.addresses.first.address).to eq("address")
+      expect(user.addresses.first.nickname).to eq("home")
     end
   end
 end

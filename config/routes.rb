@@ -22,8 +22,7 @@ Rails.application.routes.draw do
   get '/address/edit', to: 'profile/addresses#edit', as: :edit_address
   patch '/address/edit', to: 'profile/addresses#update', as: :update_address
   delete '/address/delete/:id', to: 'profile/addresses#destroy', as: :delete_address
-  get '/addresses', to: 'profile/addresses#new', as: :new_address
-  post '/addresses', to: 'profile/addresses#create'
+  # post '/addresses', to: 'profile/addresses#create'
   get '/addresses', to: 'profile/addresses#index', as: :address_index
 
   # User Profile Paths
@@ -32,6 +31,7 @@ Rails.application.routes.draw do
   patch '/profile/edit', to: 'users#update'
   namespace :profile do
     resources :orders, only: [:index, :show, :destroy, :create]
+    resources :addresses, only: [:create]
   end
 
   namespace :dashboard do
