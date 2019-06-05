@@ -1,23 +1,17 @@
-<h1>Update Your Addresses</h1>
+<h1>Update Your Address</h1>
 
-<%= form_for @address, url: edit_address_path, method: :patch do |f| %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
+    <%= form_for @address, url: edit_address_path, method: :patch do |f| %>
+      <%= f.label :address %>
+      <%= f.text_field :address %>
 
-  <%= f.label :city %>
-  <%= f.text_field :city %>
+      <%= f.label :city %>
+      <%= f.text_field :city %>
 
-  <%= f.label :state %>
-  <%= f.text_field :state %>
+      <%= f.label :state %>
+      <%= f.text_field :state %>
 
-  <%= f.label :zip %>
-  <%= f.text_field :zip %>
+      <%= f.label :zip %>
+      <%= f.text_field :zip %>
 
-  <%= f.label :address_nickname, "Address Nickname" %>
-  <%= f.text_field :address_nickname %>
-
-  <%= f.submit "Update Addresses" %>
-
-<% end %>
-
-<%= link_to "Delete Address", delete_address_path, method: :delete %>
+      <%= f.submit "Update Address" %>
+  <% end %>

@@ -2,13 +2,26 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items
   has_many :items, through: :order_items
+  has_many :addresses
+  has_many :order_addresses
+  has_many :addresses, through: :order_addresses
+  has_and_belongs_to_many :addresses
 
   validates_presence_of :status
 
   enum status: [:pending, :packaged, :shipped, :cancelled]
 
+  def chosen_address
+    user_id = user
+    user.address_nickname
+  end
+
   def total_item_count
     order_items.sum(:quantity)
+  end
+
+  def changeable_order?
+    status == "pending"
   end
 
   def total_cost

@@ -133,28 +133,18 @@ RSpec.describe 'user profile', type: :feature do
     end
 
     it "allows user to update addresses" do
-      create(:user, email: 'mousse@email.com')
       login_as(@user)
+      @user.addresses.create!(address: "address", city: "city", state: "state", zip: "zip")
+      address = @user.addresses.last
 
-      visit edit_address_path
+      visit edit_address_path(address)
 
       fill_in "Address", with: '123 4th St.'
-      fill_in "Address Nickname", with: :work
 
-      click_button 'Update Addresses'
-    end
-
-    it "allows user to delete addresses" do
-      create(:user, email: 'mousse@email.com')
-      login_as(@user)
-
-      visit edit_address_path
-
-      expect(page).to have_link 'Delete Address'
+      click_button 'Update Address'
     end
 
     it "allows user to add addresses" do
-      create(:user, email: 'mousse@email.com')
       login_as(@user)
 
       visit new_address_path
@@ -168,7 +158,53 @@ RSpec.describe 'user profile', type: :feature do
       click_button 'Add Address'
 
       expect(current_path).to eq(address_index_path)
-      save_and_open_page
+    end
+
+    it "has links to edit, show all, add, and delete an address" do
+      login_as(@user)
+      address = @user.addresses.create!(address: "address", city: "city", state: "state", zip: "zip")
+
+      expect(page).to have_link 'Edit Addresses'
+      click_link 'Edit Addresses'
+      expect(current_path).to eq(edit_address_path)
+
+      fill_in "Address", with: "address"
+      fill_in "City", with: "city"
+      fill_in "State", with: "state"
+      fill_in "Zip", with: "zip"
+
+      click_button 'Update Address'
+      expect(current_path).to eq(address_index_path)
+
+      visit profile_path
+      expect(page).to have_link 'All Addresses'
+      click_link 'All Addresses'
+      expect(current_path).to eq(address_index_path)
+
+      visit profile_path
+      expect(page).to have_link 'Add An Address'
+      click_link 'Add An Address'
+      expect(current_path).to eq(profile_addresses_path)
+
+      fill_in "Address", with: "yonker"
+      fill_in "City", with: "bonker"
+      fill_in "State", with: "city"
+      fill_in "Zip", with: "pi"
+
+      click_button 'Add Address'
+
+      visit address_index_path
+
+      expect(page).to have_content("yonker")
+
+      # visit profile_path
+      # expect(page).to have_link 'Delete An Address'
+      # click_link 'Delete An Address'
+      # expect(current_path).to eq(delete_address_path(address))
     end
   end
 end
+
+# If a user deletes all of their addresses, they cannot check out and
+# see an error telling them they need to add an address first.
+# This should link to a page where they add an address.

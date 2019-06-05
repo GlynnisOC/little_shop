@@ -30,6 +30,11 @@ RSpec.describe "Checking out" do
       @new_order = Order.last
     end
 
+    it "should have Shipping Address show in every order" do
+      expect(page).to have_content("Shipping Address")
+      expect(page).to have_content("#{@new_order.chosen_address}")
+    end
+
     it "should create a new order" do
       expect(current_path).to eq(profile_orders_path)
       expect(page).to have_content("Your order has been created!")
