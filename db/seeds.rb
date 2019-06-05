@@ -10,6 +10,8 @@ User.destroy_all
 admin = create(:admin)
 user = create(:user)
 merchant_1 = create(:merchant)
+address = user.addresses.create!(address: "address", city: "city", state: "state", zip: "zip")
+addresstwo = user.addresses.create!(address: "addresstwo", city: "citytwo", state: "statetwo", zip: "ziptwo")
 
 merchant_2, merchant_3, merchant_4 = create_list(:merchant, 3)
 
