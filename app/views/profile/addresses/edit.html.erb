@@ -1,6 +1,6 @@
 <h1>Update Your Address</h1>
 
-    <%= form_for @address, url: edit_address_path, method: :patch do |f| %>
+    <%= form_for @address, url: update_address_path(@address), method: :patch do |f| %>
       <%= f.label :address %>
       <%= f.text_field :address %>
 
